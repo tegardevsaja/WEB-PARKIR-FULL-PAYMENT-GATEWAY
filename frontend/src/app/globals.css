@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  
+  body {
+    @apply bg-gray-50/50 text-gray-900;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .gradient-primary {
+    background: linear-gradient(135deg, #5465FF 0%, #00FFD4 100%);
+  }
+  
+  .gradient-secondary {
+    background: linear-gradient(135deg, #D2DDFF 0%, #5465FF 100%);
+  }
+}
