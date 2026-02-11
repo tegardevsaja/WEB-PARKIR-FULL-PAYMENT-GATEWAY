@@ -1,0 +1,37 @@
+TEKNOLOGI STACK
+
+FRONTEND
+- Framework: Next.js 14
+- UI Library: Shadcn/UI + Tailwind CSS
+- State Management: Zustand
+- Form Handling: React Hook Form + Zod
+- HTTP Client: Axios
+- Charts: Recharts
+- QR Code Display: qrcode.react
+- PDF Generation: jsPDF + html2canvas
+
+BACKEND
+- Runtime: Node.js 18+
+- Framework: Express.js
+- Database Driver: mysql2
+- Authentication: JWT (jsonwebtoken)
+- Password Hashing: bcrypt
+- Validation: express-validator
+- CORS: cors
+- Environment: dotenv
+
+DATABASE
+- DBMS: MySQL 8.0+
+
+PAYMENT GATEWAY
+- Provider: Midtrans
+- Method: QRIS (QR Code Indonesian Standard)
+- SDK: midtrans-client (Node.js)
+- API: Snap API / Core API
+
+ADDITIONAL TOOLS
+- Version Control: Git
+- Package Manager: npm / yarn
+- Code Editor: VS Code
+- API Testing: Postman / Thunder Client
+- Database Tool: MySQL Workbench / phpMyAdmin

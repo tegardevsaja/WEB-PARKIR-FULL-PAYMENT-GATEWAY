@@ -1,0 +1,161 @@
+METODOLOGI PENGEMBANGAN - WATERFALL
+
+Aplikasi Parkir Berbasis Web
+SMK - Rekayasa Perangkat Lunak
+Ujian Praktik Kejuruan
+
+
+1. PENGENALAN METODOLOGI WATERFALL
+
+Waterfall adalah metode pengembangan perangkat lunak yang berjalan secara berurutan. 
+Setiap tahap harus diselesaikan terlebih dahulu sebelum masuk ke tahap berikutnya.
+
+Karakteristik Waterfall:
+1. Bersifat berurutan (sequential)
+2. Tidak ada pengulangan ke tahap sebelumnya
+3. Setiap tahap menghasilkan dokumentasi
+4. Proses terstruktur dan jelas
+5. Timeline mudah diprediksi
+
+Urutan Tahapan:
+1. Requirements Analysis
+2. System Design
+3. Implementation
+4. Testing
+5. Deployment dan Maintenance
+
+
+2. ALASAN MEMILIH WATERFALL
+
+Metode Waterfall dipilih karena:
+
+1. Requirement dari soal ujian sudah jelas.
+2. Waktu pengerjaan terbatas.
+3. Dokumentasi seperti ERD, DFD, dan Flowchart wajib dibuat.
+4. Prosesnya terstruktur sehingga mudah diikuti.
+5. Progress dapat dikontrol dengan baik.
+
+Walaupun Waterfall kurang fleksibel, hal ini tidak menjadi masalah karena kebutuhan sistem tidak berubah selama ujian.
+
+
+3. FASE 1 - REQUIREMENTS ANALYSIS
+
+Tujuan:
+Memahami dan mendokumentasikan kebutuhan sistem.
+
+Aktivitas:
+1. Menganalisis soal ujian.
+2. Mengidentifikasi fitur utama sistem.
+3. Menentukan kebutuhan fungsional dan non-fungsional.
+4. Menentukan teknologi yang digunakan.
+
+Output:
+- Dokumen kebutuhan sistem (SRS)
+- Daftar fitur
+- Use Case Diagram
+- User Stories
+
+Durasi: 1-2 jam
+
+
+4. FASE 2 - SYSTEM DESIGN
+
+Tujuan:
+Merancang sistem berdasarkan kebutuhan yang sudah dianalisis.
+
+Aktivitas:
+1. Mendesain database dan membuat ERD.
+2. Membuat DFD Level 0 dan Level 1.
+3. Membuat flowchart proses utama.
+4. Mendesain arsitektur sistem (Frontend, Backend, Database).
+5. Mendesain API dan struktur endpoint.
+6. Mendesain tampilan antarmuka (wireframe).
+
+Output:
+- ERD
+- DFD
+- Flowchart
+- Database schema
+- Desain API
+- Desain tampilan
+
+Durasi: 2-3 jam
+
+
+5. FASE 3 - IMPLEMENTATION
+
+Tujuan:
+Mengubah desain menjadi aplikasi yang berjalan.
+
+Aktivitas:
+1. Setup environment dan struktur project.
+2. Membuat database dan tabel.
+3. Membuat backend API menggunakan Node.js dan Express.
+4. Membuat frontend menggunakan Next.js.
+5. Menghubungkan frontend dengan backend.
+6. Implementasi autentikasi dan pembayaran.
+
+Output:
+- Source code frontend dan backend
+- Database siap pakai
+- Aplikasi dapat dijalankan
+
+Durasi: 5-6 jam
+
+
+6. FASE 4 - TESTING
+
+Tujuan:
+Memastikan sistem berjalan sesuai dengan kebutuhan.
+
+Aktivitas:
+1. Menguji setiap fitur.
+2. Menguji alur login, transaksi, dan laporan.
+3. Menguji integrasi pembayaran.
+4. Memperbaiki bug yang ditemukan.
+
+Output:
+- Laporan pengujian
+- Aplikasi stabil dan siap digunakan
+
+Durasi: 1-2 jam
+
+
+7. FASE 5 - DEPLOYMENT DAN MAINTENANCE
+
+Tujuan:
+Menyiapkan aplikasi agar siap digunakan.
+
+Aktivitas:
+1. Final testing.
+2. Menyiapkan dokumentasi.
+3. Backup database.
+4. Menyiapkan presentasi.
+
+Output:
+- Aplikasi siap dipresentasikan
+- Dokumentasi lengkap
+
+Durasi: 1 jam
+
+
+8. TIMELINE PENGERJAAN
+
+Total waktu: 11 jam
+
+1. Requirements Analysis: 1-2 jam
+2. System Design: 2-3 jam
+3. Implementation: 5-6 jam
+4. Testing: 1-2 jam
+5. Deployment: 1 jam
+
+
+9. KESIMPULAN
+
+Metode Waterfall cocok digunakan karena:
+1. Requirement sudah jelas.
+2. Waktu pengerjaan terbatas.
+3. Dokumentasi lengkap diperlukan.
+4. Proses terstruktur dan mudah diikuti.
+
+Dengan mengikuti tahapan Waterfall secara disiplin, pengerjaan proyek dapat dilakukan secara teratur, terkontrol, dan sesuai dengan waktu yang tersedia.
