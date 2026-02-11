@@ -8,11 +8,12 @@ import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 
 export default function Header() {
-  const { user } = useAuthStore();
+  const { user, logout } = useAuthStore();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const notifications = [
@@ -35,9 +36,18 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     if (confirm("Yakin ingin logout?")) {
-      window.location.href = "/login";
+      setIsLoggingOut(true);
+      setIsDropdownOpen(false);
+      try {
+        await logout();
+        window.location.href = "/login";
+      } catch (error) {
+        console.error("Logout error:", error);
+        // Force redirect even if API call fails
+        window.location.href = "/login";
+      }
     }
   };
 
@@ -177,10 +187,20 @@ export default function Header() {
                     <div className="border-t border-gray-100 py-2">
                       <button
                         onClick={handleLogout}
-                        className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 transition-colors"
+                        disabled={isLoggingOut}
+                        className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-3 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        <LogOut className="w-4 h-4" />
-                        Logout
+                        {isLoggingOut ? (
+                          <>
+                            <div className="w-4 h-4 border-2 border-red-500 border-t-transparent rounded-full animate-spin" />
+                            Logging out...
+                          </>
+                        ) : (
+                          <>
+                            <LogOut className="w-4 h-4" />
+                            Logout
+                          </>
+                        )}
                       </button>
                     </div>
                   </div>

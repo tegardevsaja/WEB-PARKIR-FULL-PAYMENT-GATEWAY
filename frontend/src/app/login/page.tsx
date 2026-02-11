@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
 import api from "@/lib/axios";
@@ -11,23 +11,21 @@ import { LogIn, Loader2, Car } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
-  const login = useAuthStore((state) => state.login);
+  const { login, user, isAuthenticated, initAuth } = useAuthStore();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
+  useEffect(() => {
+    // Initialize auth once on mount
+    initAuth();
+  }, []); // Empty dependency array - run only once
 
-    try {
-      const response = await api.post("/auth/login", { username, password });
-      const { user, token } = response.data;
-      
-      login(user, token);
-      
+  useEffect(() => {
+    // Redirect if already logged in
+    if (isAuthenticated && user) {
+      console.log('Already authenticated, redirecting...');
       if (user.role === "admin") {
         router.push("/admin/dashboard");
       } else if (user.role === "petugas") {
@@ -35,12 +33,61 @@ export default function LoginPage() {
       } else if (user.role === "owner") {
         router.push("/owner/dashboard");
       }
+    }
+  }, [isAuthenticated, user, router]); // Removed initAuth from dependencies
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      console.log('Starting login with:', username);
+      const loggedInUser = await login(username, password);
+      console.log('Login successful, user:', loggedInUser);
+      
+      if (!loggedInUser) {
+        console.error('No user returned from login');
+        setError("Login gagal. Tidak ada data user.");
+        setLoading(false);
+        return;
+      }
+
+      // Determine redirect path
+      let redirectPath = '/login';
+      if (loggedInUser.role === "admin") {
+        redirectPath = "/admin/dashboard";
+      } else if (loggedInUser.role === "petugas") {
+        redirectPath = "/petugas/dashboard";
+      } else if (loggedInUser.role === "owner") {
+        redirectPath = "/owner/dashboard";
+      }
+      
+      console.log('Redirecting to:', redirectPath);
+      
+      // Use setTimeout to ensure state is updated before redirect
+      setTimeout(() => {
+        window.location.href = redirectPath;
+      }, 100);
+      
     } catch (err: any) {
-      setError(err.response?.data?.message || "Login gagal. Periksa username dan password Anda.");
-    } finally {
+      console.error('Login error:', err);
+      setError(err.message || "Login gagal. Periksa username dan password Anda.");
       setLoading(false);
     }
   };
+
+  // Don't show login form if already authenticated
+  if (isAuthenticated && user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Redirecting...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-blue-50 to-primary-100 p-4">

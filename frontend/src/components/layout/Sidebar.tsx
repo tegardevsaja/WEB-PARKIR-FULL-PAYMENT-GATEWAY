@@ -19,6 +19,7 @@ import {
   Menu,
   X,
   UserCog,
+  CreditCard,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -49,10 +50,22 @@ const menuItems: MenuItem[] = [
     roles: ["owner"],
   },
   {
+    label: "Manajemen Petugas",
+    href: "/owner/users",
+    icon: Users,
+    roles: ["owner"],
+  },
+  {
     label: "Kasir",
     href: "/petugas/kasir",
     icon: Car,
     roles: ["petugas"],
+  },
+  {
+    label: "History Pembayaran",
+    href: "/admin/payments",
+    icon: CreditCard,
+    roles: ["admin", "owner", "petugas"],
   },
   {
     label: "Manajemen User",
@@ -100,8 +113,9 @@ const menuItems: MenuItem[] = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { user, setDummyUser } = useAuthStore();
+  const { user, setDummyUser, logout } = useAuthStore();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const filteredMenu = menuItems.filter((item) =>
     item.roles.includes(user?.role || "")
@@ -110,6 +124,19 @@ export default function Sidebar() {
   const handleRoleSwitch = (role: "admin" | "petugas" | "owner") => {
     setDummyUser(role);
     setIsMobileOpen(false);
+  };
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      await logout();
+      // Redirect to login page
+      window.location.href = "/login";
+    } catch (error) {
+      console.error("Logout error:", error);
+      // Force redirect even if API call fails
+      window.location.href = "/login";
+    }
   };
 
   const SidebarContent = () => (
@@ -198,11 +225,21 @@ export default function Sidebar() {
 
       <div className="p-3 border-t border-gray-100">
         <button
-          onClick={() => window.location.href = "/login"}
-          className="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-gray-600 hover:bg-red-50 hover:text-red-600 transition-all text-sm font-medium group"
+          onClick={handleLogout}
+          disabled={isLoggingOut}
+          className="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-gray-600 hover:bg-red-50 hover:text-red-600 transition-all text-sm font-medium group disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <LogOut className="w-5 h-5 text-gray-400 group-hover:text-red-500 transition-colors" />
-          <span>Logout</span>
+          {isLoggingOut ? (
+            <>
+              <div className="w-5 h-5 border-2 border-red-500 border-t-transparent rounded-full animate-spin" />
+              <span>Logging out...</span>
+            </>
+          ) : (
+            <>
+              <LogOut className="w-5 h-5 text-gray-400 group-hover:text-red-500 transition-colors" />
+              <span>Logout</span>
+            </>
+          )}
         </button>
       </div>
     </>

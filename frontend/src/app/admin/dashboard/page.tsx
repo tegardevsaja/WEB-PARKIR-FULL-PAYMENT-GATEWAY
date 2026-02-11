@@ -140,6 +140,26 @@ export default function AdminDashboard() {
           </div>
         </div>
 
+        {/* Banner Image - Full Width with Overlay Text */}
+        <div className="relative w-full h-48 rounded-2xl overflow-hidden shadow-lg">
+          <img 
+            src="/images/BANNER.png" 
+            alt="Banner Dashboard" 
+            className="w-full h-full object-cover"
+          />
+          {/* Overlay Text */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent flex items-center px-8">
+            <div className="text-white">
+              <h2 className="text-4xl md:text-5xl font-bold mb-2 tracking-tight">
+                LaVista Parking
+              </h2>
+              <p className="text-lg md:text-xl font-light opacity-90">
+                Sistem Manajemen Parkir Modern & Terpercaya
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Stats Cards */}
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
